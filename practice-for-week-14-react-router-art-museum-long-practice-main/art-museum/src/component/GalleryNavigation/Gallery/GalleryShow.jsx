@@ -1,7 +1,24 @@
 import React from "react";
-import GalleryData from "art-museum/src/data/harvardArt.js";
-import { useParams } from 'react-router-dom';
+import harvardArt from "../../../data/harvardArt";
+import { useParams } from "react-router-dom";
 
-function GalleryShow(){
+function GalleryShow() {
+  const { id } = useParams();
 
+  const galleryData = harvardArt.records.find((gallery) => {
+    if (gallery.id === parseInt(id)) {
+      return gallery;
+    }
+  });
+  console.log(galleryData);
+  return (
+    <div>
+      <ul>
+        <li>Name: {galleryData.name}</li>
+        <li>Info: {galleryData.labeltext}</li>
+      </ul>
+    </div>
+  );
 }
+
+export default GalleryShow;
